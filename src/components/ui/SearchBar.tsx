@@ -4,17 +4,24 @@ import { Input } from './input';
 
 interface SearchBarProps {
   error?: boolean;
+  onSearch?: (query: string) => void;
 }
 
-export function SearchBar({ error = false }: SearchBarProps) {
+export function SearchBar({ error = false, onSearch }: SearchBarProps) {
   const [searchValue, setSearchValue] = useState('');
 
   const clearSearch = () => {
     setSearchValue('');
+    onSearch?.('');
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSearch?.(searchValue);
   };
 
   return (
-    <form role="search" className="relative max-w-md w-full">
+    <form role="search" className="relative max-w-md w-full" onSubmit={handleSubmit}>
       <label htmlFor="search-input" className="sr-only">
         Search for photos
       </label>
