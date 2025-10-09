@@ -10,7 +10,7 @@ export function ImageCard({ photo, onImageLoad }: ImageCardProps) {
   const altText =
     photo.alt_description || photo.description || `Photo by ${photo.user.name}`;
 
-  const { src, isLoading, isInView, ref } = useProgressiveImage({
+  const { src, isLoading, ref } = useProgressiveImage({
     thumb: photo.urls.thumb,
     small: photo.urls.small,
     regular: photo.urls.regular,
@@ -24,9 +24,7 @@ export function ImageCard({ photo, onImageLoad }: ImageCardProps) {
   return (
     <div
       ref={ref}
-      className={`group relative overflow-hidden rounded-lg bg-background-secondary transition-all ${
-        isLoading && isInView ? 'animate-pulse [animation-duration:2s]' : ''
-      }`}
+      className={`group relative overflow-hidden rounded-lg bg-background-secondary transition-all`}
     >
       <div className="relative">
         <img
